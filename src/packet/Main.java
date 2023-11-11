@@ -3,9 +3,9 @@ import java.sql.*; //Импортируем необходимые инстру�
 public class Main {
 	public static void main(String[] args) {
 		try{ //На случай возникновения ошибок
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:staff.db");
+			Connection con = DriverManager.getConnection("jdbc:sqlite:staff.db");//Подключаемся
             String sqlQuery = "SELECT surname FROM employees ORDER BY experience DESC LIMIT 1 OFFSET 1";
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            PreparedStatement preparedStatement = con.prepareStatement(sqlQuery);//Выполняем запрос
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) { //Если есть сотрудники
             	String surname = resultSet.getString("surname"); //Получаем данные
@@ -13,8 +13,9 @@ public class Main {
             }else{
                 System.out.println("Нет данных о сотрудниках.");
              }
+            con.close();//Отключаемся
    
-        }catch (SQLException e) {
+        }catch (SQLException e) { //Выписываем ошибки при работе с бд
         	System.out.println(e.getMessage());
         }
 	}
