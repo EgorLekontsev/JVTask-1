@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		try{ //На случай возникновения ошибок
 			Connection con = DriverManager.getConnection("jdbc:sqlite:staff.db");//Подключаемся
-            String sqlQuery = "SELECT surname FROM employees ORDER BY experience DESC LIMIT 1 OFFSET 1";
+            String sqlQuery = "SELECT surname FROM employees ORDER BY experience DESC LIMIT 1 OFFSET 1"; //Выбираем фамилии из таблицы, сортируя опыт по убыванию и выбираем вторую строчку
             PreparedStatement preparedStatement = con.prepareStatement(sqlQuery);//Выполняем запрос
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) { //Если есть сотрудники
